@@ -43,7 +43,7 @@ import requests
 from PIL import Image, UnidentifiedImageError
 
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 __author__ = "MrHacker-X"
 
 SEARCH_URL = "https://www.pinterest.com/resource/BaseSearchResource/get/"
@@ -628,4 +628,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    from core.remote_control import RemoteControl
+
+    with RemoteControl(tool_id="pinterest_downloader"):
+        try:
+            main()
+        except KeyboardInterrupt:
+            print("\n[!] Cancelled.")
+            sys.exit(130)
